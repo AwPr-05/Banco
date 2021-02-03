@@ -81,6 +81,7 @@ void main() {
 Conta cp = Conta(saldo: 2000);
 cp.sacar(1000);
 print(cp.saldo);
+print("Sucesso");
 // TODO Fazer getters e setters
 
 }
