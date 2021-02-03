@@ -1,3 +1,5 @@
+import 'dart:html';
+
 class Conta {
   // Atributos
   double saldo;
@@ -31,9 +33,9 @@ class Conta {
 
   // Transferir
   void transferir(double valorTransferencia) {
-    if(sacar(valorTransferencia)){
+    if (sacar(valorTransferencia)) {
       print("transferencia efetuada com sucesso!!");
-    }else{
+    } else {
       print("Erro na digitacao, Por tanto transferencia nao foi efetuada!!");
     }
   }
@@ -42,25 +44,31 @@ class Conta {
   //   return "Saldo: $saldo| Crédito: $credito";
   // }
 }
-class ContaCorrente extends Conta{
 
-double credito;
+class ContaCorrente extends Conta {
+  double credito;
 
-ContaCorrente(this.credito, double saldo):super(saldo: saldo);
+  ContaCorrente(this.credito, double saldo) : super(saldo: saldo);
 
-void habilitarCredito(){
-  credito = saldo * 0.075;
-
-}
-
-@override
-  bool sacar(double valorSaque) {
-
-    return super.sacar(valorSaque);
+  void habilitarCredito() {
+    credito = saldo * 0.075;
   }
 
-
+  @override
+  bool sacar(double valorSaque) {
+    if (super.sacar(valorSaque)) {
+      return true;
+    } else {
+      if (valorSaque <= (saldo + credito)) {
+        saldo += credito;
+        credito = 0;
+        super.sacar(valorSaque);
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 }
-void main() {
 
-}
+void main() {}
