@@ -32,11 +32,13 @@ class Conta {
   }
 
   // Transferir
-  void transferir(double valorTransferencia) {
+  bool transferir(double valorTransferencia) {
     if (sacar(valorTransferencia)) {
-      print("transferencia efetuada com sucesso!!");
+      // print("transferencia efetuada com sucesso!!");
+      return true;
     } else {
-      print("Erro na digitacao, Por tanto transferencia nao foi efetuada!!");
+      // print("Erro na digitacao, Por tanto transferencia nao foi efetuada!!");
+      return false;
     }
   }
 
@@ -63,6 +65,22 @@ class ContaCorrente extends Conta {
         saldo += credito;
         credito = 0;
         super.sacar(valorSaque);
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  @override
+  bool transferir(double valorTransferencia) {
+    if (super.transferir(valorTransferencia)) {
+      return true;
+    } else {
+      if (valorTransferencia <= (saldo + credito)) {
+        saldo += credito;
+        credito = 0;
+        super.sacar(valorTransferencia);
         return true;
       } else {
         return false;
