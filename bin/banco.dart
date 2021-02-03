@@ -1,5 +1,3 @@
-import 'dart:html';
-
 class Conta {
   // Atributos
   double saldo;
@@ -8,7 +6,6 @@ class Conta {
   Conta({this.saldo});
 
   // Métodos
-
   // Sacar
   bool sacar(double valorSaque) {
     if (valorSaque <= saldo) {
@@ -17,18 +14,6 @@ class Conta {
     } else {
       return false;
     }
-
-    // if (valorSaque <= saldo) {
-    //   saldo -= valorSaque;
-    // } else if (valorSaque < (saldo + credito)) {
-    //   // Desconto no saldo
-    //   var valorRestante = valorSaque - saldo;
-    //   saldo = 0;
-    //   credito -= valorRestante;
-    //   print("Saque efetuado com sucesso");
-    // } else {
-    //   print("Saldo insuficiente");
-    // }
   }
 
   // Transferir
@@ -42,9 +27,11 @@ class Conta {
     }
   }
 
-  // String toString() {
-  //   return "Saldo: $saldo| Crédito: $credito";
-  // }
+// Depositar
+  void depositar(double valorDeposito) {
+    saldo += valorDeposito;
+  }
+
 }
 
 class ContaCorrente extends Conta {
@@ -89,4 +76,11 @@ class ContaCorrente extends Conta {
   }
 }
 
-void main() {}
+void main() {
+
+Conta cp = Conta(saldo: 2000);
+cp.sacar(1000);
+print(cp.saldo);
+// TODO Fazer getters e setters
+
+}
